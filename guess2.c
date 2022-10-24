@@ -50,14 +50,15 @@ int main()
     // seed the time in random, generate target
     time_t t;
     srand((unsigned) time(&t));
-    target = (rand() % 10) + 1;
+    
 
     // actual game with do-while loop
     do{
         // new game start
         // reset variables
         guess = 0;
-        
+        target = (rand() % 10) + 1;
+        keepGame = 1;
         displayMenu();
         menu = promptUser();
 
@@ -87,6 +88,7 @@ int main()
                     }
                     else
                     {
+                        fflush(stdin);
                         keepGame = 0;
                     }
 
@@ -96,6 +98,11 @@ int main()
                 // change max num
                 printf("set new max, 1 - 10: ");
                 scanf("%d", &max);
+                if((max < 0) || max > 10)
+                {
+                    max = 10;
+                    printf("Please enter the valid range...");
+                }
                 keepProgram = 1;
                 break;
             case 3: 
@@ -107,11 +114,7 @@ int main()
                 keepProgram = 1;
                 break;
         }
-
-        
-
-
-
+        fflush(stdin);
     } while (keepProgram == 1);
 
 
